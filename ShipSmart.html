@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShipSmart｜跨境購物成本計算助手</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182230;--muted:#667085;--line:#e6eaf0;--brand:#4361ee;--brand2:#6c7df5;--green:#12805c;--red:#c24141;--shadow:0 8px 28px rgba(23,35,79,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans TC",system-ui,-apple-system,sans-serif}button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:28px 22px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--brand),#8a5cf6);color:white;display:grid;place-items:center;font-size:22px}.brand h1{font-size:21px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.pill{border:1px solid #d9defe;background:#eef0ff;color:#3448bd;padding:7px 11px;border-radius:99px;font-size:12px;font-weight:700}.hero{background:linear-gradient(115deg,#263a9b,#586df0 65%,#7c67e8);color:white;border-radius:24px;padding:28px 30px;margin-bottom:22px;box-shadow:var(--shadow)}.hero h2{font-size:26px;margin:0 0 8px}.hero p{margin:0;color:#e6eaff;line-height:1.65;max-width:720px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 22px}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.stat{padding:17px 19px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:23px;margin-top:7px}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.panel{padding:21px;margin-bottom:18px}.panel h3{font-size:17px;margin:0 0 17px;display:flex;align-items:center;gap:8px}.sub{font-size:12px;color:var(--muted);font-weight:400}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:12px;color:#475467;font-weight:700}input,select{width:100%;border:1px solid #d9dee8;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);outline:none}input:focus,select:focus{border-color:var(--brand);box-shadow:0 0 0 3px #4361ee18}.hint{font-size:11px;color:var(--muted);line-height:1.5}.btn{border:0;border-radius:11px;padding:11px 15px;background:var(--brand);color:#fff;font-weight:700;cursor:pointer}.btn:hover{background:#304bd1}.btn.secondary{background:#eef0ff;color:#3448bd}.btn.danger{background:#fff0f0;color:var(--red)}.btn.small{padding:7px 10px;font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.resultbox{background:#f4f6ff;border:1px solid #e0e5ff;border-radius:14px;padding:15px;margin-top:14px}.resultline{display:flex;justify-content:space-between;gap:12px;padding:6px 0;color:#475467;font-size:13px}.resultline.total{border-top:1px solid #dce2ff;margin-top:7px;padding-top:12px;color:var(--ink);font-weight:800;font-size:16px}.carrier{border:1px solid var(--line);border-radius:13px;padding:13px;margin:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.carrier.best{border-color:#79c9a8;background:#f2fbf7}.carrier strong{display:block}.carrier small{color:var(--muted)}.price{text-align:right;font-weight:800;font-size:18px;white-space:nowrap}.besttag{display:inline-block;background:#dff7eb;color:#08734e;font-size:10px;padding:3px 7px;border-radius:99px;margin-left:6px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-size:11px}.empty{text-align:center;color:var(--muted);padding:24px}.footer{font-size:11px;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#182230;color:white;padding:10px 16px;border-radius:10px;opacity:0;transition:.2s;pointer-events:none}.toast.show{opacity:1}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.hero{padding:23px}.hero h2{font-size:22px}}@media(max-width:480px){.shell{padding:18px 13px 40px}.top{align-items:flex-start}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.panel{padding:16px}.hero{border-radius:18px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="brand"><div class="logo">📦</div><div><h1>ShipSmart</h1><p>跨境購物成本計算助手</p></div></div>
+  <span class="pill">前端互動原型</span>
+</header>
+<section class="hero">
+  <h2>買之前先算清楚，運費不再霧煞煞。</h2>
+  <p>輸入商品價格、匯率與包裹尺寸，快速比較不同集運方案。所有資料暫存在目前瀏覽器，適合課堂展示與個人試算。</p>
+</section>
+<section class="stats">
+  <div class="stat"><small>本次商品總額（台幣）</small><strong id="statGoods">NT$ 0</strong></div>
+  <div class="stat"><small>計費重量</small><strong id="statWeight">0 kg</strong></div>
+  <div class="stat"><small>最低預估到手價</small><strong id="statBest">NT$ 0</strong></div>
+</section>
+<div class="layout">
+<main>
+  <section class="panel">
+    <h3>① 商品與匯率 <span class="sub">輸入購物清單</span></h3>
+    <div class="formgrid">
+      <div class="field"><label for="rate">人民幣兌台幣匯率</label><input id="rate" type="number" min="0" step="0.001" value="4.45"></div>
+      <div class="field"><label for="extra">其他費用（台幣）</label><input id="extra" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="itemName">商品名稱</label><input id="itemName" placeholder="例如：模型、衣服"></div>
+      <div class="field"><label for="itemPrice">單價（人民幣 ¥）</label><input id="itemPrice" type="number" min="0" step="0.01" placeholder="例如：629"></div>
+      <div class="field"><label for="itemQty">數量</label><input id="itemQty" type="number" min="1" step="1" value="1"></div>
+      <div class="field" style="justify-content:end"><button class="btn" id="addItem">＋ 加入商品</button></div>
+    </div>
+    <div class="tablewrap" style="margin-top:15px"><table><thead><tr><th>商品</th><th>單價 × 數量</th><th>小計（台幣）</th><th></th></tr></thead><tbody id="itemsBody"><tr><td colspan="4" class="empty">尚未加入商品</td></tr></tbody></table></div>
+  </section>
+  <section class="panel">
+    <h3>② 包裹重量計算 <span class="sub">自動取實重與材積重較大者</span></h3>
+    <div class="formgrid">
+      <div class="field"><label for="actual">實際重量（kg）</label><input id="actual" type="number" min="0" step="0.01" value="1.5"></div>
+      <div class="field"><label for="divisor">材積除數</label><select id="divisor"><option value="6000">6000（常見空運算法）</option><option value="5000">5000</option><option value="8000">8000</option></select></div>
+      <div class="field"><label for="length">長（cm）</label><input id="length" type="number" min="0" step="0.1" value="40"></div>
+      <div class="field"><label for="width">寬（cm）</label><input id="width" type="number" min="0" step="0.1" value="30"></div>
+      <div class="field"><label for="height">高（cm）</label><input id="height" type="number" min="0" step="0.1" value="25"></div>
+      <div class="field"><label for="rounding">計費重量進位</label><select id="rounding"><option value="0.1">每 0.1 kg</option><option value="0.5">每 0.5 kg</option><option value="1">每 1 kg</option><option value="0">不進位</option></select></div>
+    </div>
+    <div class="resultbox">
+      <div class="resultline"><span>材積重量</span><strong id="volumeWeight">0 kg</strong></div>
+      <div class="resultline"><span>採用重量（實重／材積重較大者）</span><strong id="chargeWeight">0 kg</strong></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h3>③ 集運商費率設定 <span class="sub">可自行修改比較條件</span></h3>
+    <div class="formgrid">
+      <div class="field"><label for="carrierName">集運商名稱</label><input id="carrierName" placeholder="例如：A 集運"></div>
+      <div class="field"><label for="baseFee">首重價格（台幣）</label><input id="baseFee" type="number" min="0" step="1" placeholder="例如：120"></div>
+      <div class="field"><label for="baseKg">首重重量（kg）</label><input id="baseKg" type="number" min="0.01" step="0.01" value="1"></div>
+      <div class="field"><label for="extraFee">續重每單位價格（台幣）</label><input id="extraFee" type="number" min="0" step="1" placeholder="例如：35"></div>
+      <div class="field"><label for="extraKg">續重單位（kg）</label><input id="extraKg" type="number" min="0.01" step="0.01" value="0.5"></div>
+      <div class="field" style="justify-content:end"><button class="btn secondary" id="addCarrier">＋ 新增集運商</button></div>
+    </div>
+    <p class="hint">計費方式：首重費用＋超過首重後的續重費用（續重不足一單位以一單位計）。目前為示範估算，實際規則請依業者公告調整。</p>
+    <div id="carrierList"></div>
+  </section>
+</main>
+<aside>
+  <section class="panel">
+    <h3>④ 費用比較結果</h3>
+    <div id="comparison"><div class="empty">請先輸入包裹資料與集運商費率</div></div>
+    <div class="resultbox">
+      <div class="resultline"><span>商品金額</span><strong id="sumGoods">NT$ 0</strong></div>
+      <div class="resultline"><span>其他費用</span><strong id="sumExtra">NT$ 0</strong></div>
+      <div class="resultline"><span>最低集運費</span><strong id="sumShip">NT$ 0</strong></div>
+      <div class="resultline total"><span>預估總到手價</span><strong id="sumTotal">NT$ 0</strong></div>
+    </div>
+    <p class="hint">到手價＝商品台幣金額＋其他費用＋預估集運費。未包含未輸入的稅金、關稅或偏遠地區附加費。</p>
+  </section>
+  <section class="panel">
+    <h3>⑤ 訂單紀錄</h3>
+    <div class="field"><label for="orderName">本次訂單名稱</label><input id="orderName" placeholder="例如：11 月淘寶合單"></div>
+    <div class="actions"><button class="btn" id="saveOrder">儲存本次試算</button><button class="btn secondary" id="exportCsv">匯出 CSV</button></div>
+    <div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>訂單</th><th>總額</th><th>日期</th><th></th></tr></thead><tbody id="historyBody"><tr><td colspan="4" class="empty">尚無儲存紀錄</td></tr></tbody></table></div>
+  </section>
+</aside>
+</div>
+<p class="footer">ShipSmart 課堂專題原型｜資料僅儲存在此瀏覽器的 LocalStorage。匯率、材積除數與各家費率皆可自行修改，請以實際業者公告為準。</p>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const money=n=>'NT$ '+Math.round(n).toLocaleString('zh-TW');
+const num=id=>Math.max(0,Number($(id).value)||0);
+let items=JSON.parse(localStorage.getItem('ss_items')||'[]');
+let carriers=JSON.parse(localStorage.getItem('ss_carriers')||'null')||[
+ {id:1,name:'示範集運 A',baseFee:120,baseKg:1,extraFee:35,extraKg:.5},
+ {id:2,name:'示範集運 B',baseFee:150,baseKg:2,extraFee:28,extraKg:1}
+];
+let history=JSON.parse(localStorage.getItem('ss_history')||'[]');
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
+function persist(){localStorage.setItem('ss_items',JSON.stringify(items));localStorage.setItem('ss_carriers',JSON.stringify(carriers));localStorage.setItem('ss_history',JSON.stringify(history))}
+function goodsTotal(){return items.reduce((s,x)=>s+x.price*x.qty*num('rate'),0)}
+function weights(){let vol=num('length')*num('width')*num('height')/num('divisor');let raw=Math.max(num('actual'),vol);let step=num('rounding');let charge=step?Math.ceil((raw-1e-9)/step)*step:raw;return {vol,raw,charge}}
+function shipping(c,w){if(w<=0)return 0;if(w<=c.baseKg)return c.baseFee;return c.baseFee+Math.ceil((w-c.baseKg)/c.extraKg-1e-9)*c.extraFee}
+function renderItems(){let b=$('itemsBody');if(!items.length){b.innerHTML='<tr><td colspan="4" class="empty">尚未加入商品</td></tr>'}else b.innerHTML=items.map((x,i)=>`<tr><td>${esc(x.name)}</td><td>¥${x.price} × ${x.qty}</td><td>${money(x.price*x.qty*num('rate'))}</td><td><button class="btn danger small" onclick="removeItem(${i})">刪除</button></td></tr>`).join('');}
+function renderCarriers(){let b=$('carrierList');b.innerHTML=carriers.map(c=>`<div class="carrier"><div><strong>${esc(c.name)}</strong><small>首重 ${c.baseKg}kg / ${money(c.baseFee)}；續重 ${c.extraKg}kg / ${money(c.extraFee)}</small></div><button class="btn danger small" onclick="removeCarrier(${c.id})">移除</button></div>`).join('')||'<div class="empty">尚未設定集運商</div>'}
+function renderHistory(){let b=$('historyBody');b.innerHTML=history.length?history.map((x,i)=>`<tr><td>${esc(x.name)}</td><td>${money(x.total)}</td><td>${x.date}</td><td><button class="btn danger small" onclick="removeHistory(${i})">刪除</button></td></tr>`).join(''):'<tr><td colspan="4" class="empty">尚無儲存紀錄</td></tr>'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function calculate(){let w=weights(),g=goodsTotal(),extra=num('extra');$('volumeWeight').textContent=w.vol.toFixed(2)+' kg';$('chargeWeight').textContent=w.charge.toFixed(2)+' kg';$('statGoods').textContent=money(g);$('statWeight').textContent=w.charge.toFixed(2)+' kg';
+let ranked=carriers.map(c=>({...c,fee:shipping(c,w.charge)})).sort((a,b)=>a.fee-b.fee);let best=ranked[0];$('comparison').innerHTML=ranked.length?ranked.map((c,i)=>`<div class="carrier ${i===0?'best':''}"><div><strong>${esc(c.name)} ${i===0?'<span class="besttag">目前最低</span>':''}</strong><small>預估集運費</small></div><div class="price">${money(c.fee)}</div></div>`).join(''):'<div class="empty">請新增至少一家集運商</div>';
+let ship=best?best.fee:0,total=g+extra+ship;$('sumGoods').textContent=money(g);$('sumExtra').textContent=money(extra);$('sumShip').textContent=money(ship);$('sumTotal').textContent=money(total);$('statBest').textContent=money(total);return {w,g,extra,ship,total,best:best?.name||'未設定'} }
+function removeItem(i){items.splice(i,1);persist();renderItems();calculate()}
+function removeCarrier(id){carriers=carriers.filter(c=>c.id!==id);persist();renderCarriers();calculate()}
+function removeHistory(i){history.splice(i,1);persist();renderHistory()}
+$('addItem').onclick=()=>{let name=$('itemName').value.trim(),price=num('itemPrice'),qty=Math.max(1,Math.floor(num('itemQty')));if(!name||price<=0){toast('請填寫商品名稱與有效價格');return}items.push({name,price,qty});$('itemName').value='';$('itemPrice').value='';persist();renderItems();calculate();toast('商品已加入')};
+$('addCarrier').onclick=()=>{let name=$('carrierName').value.trim(),baseFee=num('baseFee'),baseKg=num('baseKg'),extraFee=num('extraFee'),extraKg=num('extraKg');if(!name||baseKg<=0||extraKg<=0){toast('請填寫名稱、首重與續重單位');return}carriers.push({id:Date.now(),name,baseFee,baseKg,extraFee,extraKg});$('carrierName').value='';persist();renderCarriers();calculate();toast('集運商已新增')};
+$('saveOrder').onclick=()=>{let r=calculate(),name=$('orderName').value.trim()||'未命名訂單';if(!items.length){toast('請先加入商品再儲存');return}history.unshift({name,total:r.total,date:new Date().toLocaleDateString('zh-TW'),details:{goods:r.g,shipping:r.ship,weight:r.w.charge}});persist();renderHistory();toast('試算紀錄已儲存')};
+$('exportCsv').onclick=()=>{let rows=[['訂單名稱','總金額','日期','商品金額','集運費','計費重量(kg)'],...history.map(x=>[x.name,x.total,x.date,x.details.goods,x.details.shipping,x.details.weight])];let csv='\uFEFF'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));a.download='ShipSmart_訂單紀錄.csv';a.click();URL.revokeObjectURL(a.href)};
+['rate','extra','actual','divisor','length','width','height','rounding'].forEach(id=>$(id).addEventListener('input',calculate));
+renderItems();renderCarriers();renderHistory();calculate();
+</script>
+</body>
+</html>
